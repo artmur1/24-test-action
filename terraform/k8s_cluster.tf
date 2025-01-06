@@ -3,7 +3,7 @@ data "yandex_compute_image" "ubuntu" {
 }
 
 resource "yandex_compute_instance" "nat-instance" {
-  count       = 1
+  count       = 2
   name        = "vm-test-${count.index + 1}"
   platform_id = "standard-v3"
   zone        = var.default_zone_b
