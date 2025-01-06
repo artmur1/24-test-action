@@ -1,25 +1,12 @@
-resource "yandex_vpc_network" "murchin-net" {
+resource "yandex_vpc_network" "test-net" {
   name = local.network_name
 }
 
-resource "yandex_vpc_subnet" "public-a" {
-  name           = local.subnet_name_a
-  zone           = var.default_zone_a
-  network_id     = yandex_vpc_network.murchin-net.id
-  v4_cidr_blocks = ["192.168.10.0/24"]
-}
-
-resource "yandex_vpc_subnet" "public-b" {
+resource "yandex_vpc_subnet" "test-b" {
   name           = local.subnet_name_b
   zone           = var.default_zone_b
-  network_id     = yandex_vpc_network.murchin-net.id
-  v4_cidr_blocks = ["192.168.20.0/24"]
+  network_id     = yandex_vpc_network.test-net.id
+  v4_cidr_blocks = ["192.168.60.0/24"]
 }
 
-resource "yandex_vpc_subnet" "public-d" {
-  name           = local.subnet_name_d
-  zone           = var.default_zone_d
-  network_id     = yandex_vpc_network.murchin-net.id
-  v4_cidr_blocks = ["192.168.30.0/24"]
-}
 

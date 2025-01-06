@@ -3,8 +3,8 @@ data "yandex_compute_image" "ubuntu" {
 }
 
 resource "yandex_compute_instance" "nat-instance" {
-  count = 3
-  name        = "vm-${count.index+1}"
+  count       = 1
+  name        = "vm-test-${count.index + 1}"
   platform_id = "standard-v3"
   zone        = var.default_zone_b
 
@@ -27,7 +27,7 @@ resource "yandex_compute_instance" "nat-instance" {
 
   network_interface {
     index     = 1
-    subnet_id = yandex_vpc_subnet.public-b.id
+    subnet_id = yandex_vpc_subnet.test-b.id
     nat       = true
   }
 
