@@ -1,12 +1,3 @@
-resource "yandex_storage_object" "cute-cat-picture2" {
-  bucket = "murchin-bucket1"
-  key    = "kitten1.jpg"
-  source = "./images/kitten1.jpg"
-  tags = {
-    test = "value"
-  }
-}
-
 resource "yandex_vpc_network" "murchin-net" {
   name = local.network_name
 }
