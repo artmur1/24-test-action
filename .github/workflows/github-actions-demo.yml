@@ -64,4 +64,4 @@ jobs:
 
     - name: Terraform Destroy (Manual Trigger)
       if: github.event_name == 'workflow_dispatch' && github.event.inputs.destroy == 'true'
-      run: terraform -chdir=./terraform destroy -input=false tfplan
+      run: terraform -chdir=./terraform destroy -input=false -auto-approve
