@@ -13,8 +13,8 @@ on:
       - 'terraform/**'
   workflow_dispatch:
     inputs:
-      apply:
-        description: 'Set to "true" to apply infrastructure changes'
+      destroy:
+        description: 'Set to "true" to destroy infrastructure changes'
         required: false
         default: 'false'
 
@@ -46,6 +46,7 @@ jobs:
       run: terraform -chdir=./terraform validate
 
     - name: Terraform Destroy
+      if: github.event_name == 'workflow_dispatch' && github.event.inputs.destroy == 'true'
       run: |
         terraform -chdir=./terraform destroy \
         -var="token=${{ secrets.YC_TOKEN }}" \
