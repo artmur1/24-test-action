@@ -1,0 +1,54 @@
+name: 'Terraform CI/CD'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Set to "true" to apply infrastructure changes'
+        required: false
+        default: 'false'
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    env:
+      TOKEN: ${{ secrets.YC_TOKEN }}
+      CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
+      FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
+      SSH_PUBLIC: ${{ secrets.SSH_PUBLIC }}
+      SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: "1.5.5"
+
+    - name: Terraform Init
+      run: terraform -chdir=./terraform init
+
+    - name: Terraform Format and Validate
+      run: terraform -chdir=./terraform validate
+
+    - name: Terraform Destroy
+      run: |
+        terraform -chdir=./terraform destroy \
+        -var="token=${{ secrets.YC_TOKEN }}" \
+        -var="cloud_id=${{ secrets.YC_CLOUD_ID }}" \
+        -var="folder_id=${{ secrets.YC_FOLDER_ID }}" \
+        -var="ssh_public=${{ secrets.SSH_PUBLIC }}"
