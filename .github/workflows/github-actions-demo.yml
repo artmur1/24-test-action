@@ -27,6 +27,8 @@ jobs:
       TOKEN: ${{ secrets.YC_TOKEN }}
       CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
       FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
+      SSH_PUBLIC: ${{ secrets.SSH_PUBLIC }}
+      SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
 
     steps:
     - name: Checkout

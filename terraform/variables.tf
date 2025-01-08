@@ -30,3 +30,13 @@ variable "folder_id" {
   type        = string
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
 }
+
+#variable "SSH_PRIVATE" {
+#  type        = string
+#  description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
+#}
+
+variable "SSH_PUBLIC" {
+  type        = string
+  description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
+}

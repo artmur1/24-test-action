@@ -3,7 +3,7 @@ data "yandex_compute_image" "ubuntu" {
 }
 
 resource "yandex_compute_instance" "nat-instance" {
-  count       = 2
+  count       = 1
   name        = "vm-test-${count.index + 1}"
   platform_id = "standard-v3"
   zone        = var.default_zone_b
@@ -33,5 +33,7 @@ resource "yandex_compute_instance" "nat-instance" {
 
   metadata = {
     user-data = "${file("./meta.yml")}"
+    ssh-keys = "artem:${var.SSH_PUBLIC}"
+    serial-port-enable = "1"
   }
 }
